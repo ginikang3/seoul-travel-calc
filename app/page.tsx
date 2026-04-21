@@ -1,101 +1,154 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import { useState } from 'react';
+import { TRAVEL_QUESTIONS, Category } from '@/constants/data';
+
+export default function TravelPlanner() {
+  const [step, setStep] = useState(0);
+  const [days, setDays] = useState(7);
+  const [selections, setSelections] = useState<Record<Category, number>>({
+    stay: 0, food: 0, transport: 0, activity: 0
+  });
+
+  const nextStep = () => {
+    if (days < 1) return alert("Por favor, introduce al menos 1 día.");
+    setStep((prev) => prev + 1);
+  };
+  
+  const restart = () => {
+    setStep(0);
+    setSelections({ stay: 0, food: 0, transport: 0, activity: 0 });
+  };
+
+  const handleSelect = (id: Category, price: number) => {
+    setSelections(prev => ({ ...prev, [id]: price }));
+    nextStep();
+  };
+
+  const calculateTotal = () => {
+    const dailySum = Object.values(selections).reduce((a, b) => a + b, 0);
+    const krw = dailySum * days;
+    const mxn = Math.floor(krw / 75); 
+    return { krw, mxn };
+  };
+
+  const result = calculateTotal();
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <main className="min-h-screen bg-[#F8F9FA] py-10 px-4 font-sans text-[#1A1A1A]">
+      <style jsx global>{`
+        /* 크롬, 사파리 등에서 숫자 input 화살표 제거 */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+        }
+        /* 파이어폭스 숫자 input 화살표 제거 */
+        input[type=number] {
+          -moz-appearance: textfield;
+        }
+      `}</style>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+      <div className="max-w-md mx-auto bg-white rounded-[3rem] shadow-[0_20px_50px_rgba(0,0,0,0.05)] overflow-hidden p-10 border border-[#F1F3F5] min-h-[600px] flex flex-col">
+        
+        {step > 0 && step <= 4 && (
+          <div className="w-full h-1.5 bg-[#F1F3F5] rounded-full mb-10 overflow-hidden">
+            <div 
+              className="h-full bg-[#007AFF] transition-all duration-700 ease-in-out" 
+              style={{ width: `${(step / 4) * 100}%` }}
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+          </div>
+        )}
+
+        {step === 0 && (
+          <div className="flex-1 flex flex-col justify-center animate-in fade-in duration-500">
+            <h2 className="text-4xl font-black mb-4 tracking-tight">Presupuesto<br/><span className="text-[#007AFF]">Seúl 2026</span></h2>
+            <p className="text-[#868E96] mb-10 font-medium text-lg">¿Cuántos días vas a quedarte?</p>
+            <div className="relative mb-10 group">
+              <input 
+                type="number" 
+                inputMode="numeric"
+                pattern="[0-9]*"
+                value={days === 0 ? "" : days} 
+                onChange={(e) => setDays(Number(e.target.value))}
+                placeholder="0"
+                className="w-full p-8 bg-[#F8F9FA] border-none rounded-[2rem] text-4xl font-black text-[#007AFF] outline-none group-hover:ring-4 group-hover:ring-[#E7F1FF] transition-all text-center"
+              />
+              <p className="mt-4 text-center text-[#ADB5BD] font-bold tracking-widest uppercase text-xs">Ingresa el número de días</p>
+            </div>
+            <button 
+              onClick={nextStep}
+              className="w-full bg-[#1A1A1A] text-white py-6 rounded-[2rem] font-black text-xl hover:scale-[1.02] active:scale-[0.98] transition-all shadow-xl shadow-black/10"
+            >
+              Empezar
+            </button>
+          </div>
+        )}
+
+        {step >= 1 && step <= 4 && (
+          <div className="flex-1 animate-in slide-in-from-right duration-300">
+            <h2 className="text-2xl font-black mb-10 leading-tight">
+              {TRAVEL_QUESTIONS[step - 1].question}
+            </h2>
+            <div className="space-y-4">
+              {TRAVEL_QUESTIONS[step - 1].options.map((opt, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => handleSelect(TRAVEL_QUESTIONS[step - 1].id, opt.priceKRW)}
+                  className="w-full p-6 rounded-[2rem] border-2 border-transparent bg-[#F8F9FA] text-left transition-all hover:bg-[#E7F1FF] hover:border-[#007AFF] group active:scale-[0.98]"
+                >
+                  <div className="font-black text-lg text-[#495057] group-hover:text-[#007AFF]">{opt.text}</div>
+                  <div className="text-sm font-medium text-[#ADB5BD]">{opt.description}</div>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {step === 5 && (
+          <div className="flex-1 text-center animate-in zoom-in duration-500">
+            <div className="text-xs font-black text-[#007AFF] uppercase tracking-[0.2em] mb-4">Total Estimado</div>
+            <h2 className="text-5xl font-black text-[#1A1A1A] mb-2">${result.mxn.toLocaleString()} <span className="text-2xl text-[#ADB5BD]">MXN</span></h2>
+            <p className="text-[#ADB5BD] mb-10 font-bold italic">≈ ₩{result.krw.toLocaleString()} KRW</p>
+            
+            <div className="bg-[#F8F9FA] rounded-[2.5rem] p-8 mb-10 text-left space-y-4">
+              <div className="flex justify-between items-center">
+                <span className="text-[#868E96] font-bold">Hospedaje</span>
+                <span className="text-[#495057] font-black">${Math.floor((selections.stay * days) / 75).toLocaleString()}</span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-[#868E96] font-bold">Comida</span>
+                <span className="text-[#495057] font-black">${Math.floor((selections.food * days) / 75).toLocaleString()}</span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-[#868E96] font-bold">Actividades</span>
+                <span className="text-[#495057] font-black">${Math.floor(((selections.transport + selections.activity) * days) / 75).toLocaleString()}</span>
+              </div>
+            </div>
+
+            <div className="space-y-4">
+              <a 
+                href={`https://www.agoda.com/search?city=14690`} 
+                target="_blank"
+                className="block w-full bg-[#007AFF] text-white py-6 rounded-[2rem] font-black text-lg shadow-lg shadow-[#007AFF]/20 hover:scale-[1.02] active:scale-[0.98] transition-all"
+              >
+                Ver Hoteles en Seúl
+              </a>
+              <button 
+                onClick={restart}
+                className="w-full py-4 text-[#ADB5BD] font-bold hover:text-[#495057] transition-all"
+              >
+                Calcular de nuevo
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
+      
+      <p className="text-center mt-10 text-[10px] text-[#ADB5BD] font-bold leading-relaxed uppercase tracking-widest">
+        Precios estimados Seúl 2026.<br/>
+        Válido para 1 persona (vuelos no incluidos).
+      </p>
+    </main>
   );
 }
