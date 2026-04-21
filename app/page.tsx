@@ -34,29 +34,29 @@ export default function TravelPlanner() {
 
   const result = calculateTotal();
 
-  // 숙박 선택에 따른 동적 링크 및 텍스트 설정
+  // 숙박 선택에 따른 동적 링크 설정 (텍스트는 "Ver hotel seleccionado"로 통일)
   const getAgodaInfo = () => {
     if (selections.stay === 550000) {
       return {
         link: "https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1963214&hl=es-es&hid=4409",
-        text: "Ver The Shilla Seoul (5성급)"
+        text: "Ver hotel seleccionado"
       };
     }
     if (selections.stay === 160000) {
       return {
         link: "https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1963214&hl=es-es&hid=921919",
-        text: "Ver Shilla Stay Hongdae (3-4성급)"
+        text: "Ver hotel seleccionado"
       };
     }
     if (selections.stay === 45000) {
       return {
         link: "https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1963214&hl=es-es&hid=646891",
-        text: "Ver Hostales Recomendados"
+        text: "Ver hotel seleccionado"
       };
     }
     return {
       link: "https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1963214&hl=es-es&city=14690",
-      text: "Ver Hoteles en Seúl"
+      text: "Ver hotel seleccionado"
     };
   };
 
