@@ -34,6 +34,34 @@ export default function TravelPlanner() {
 
   const result = calculateTotal();
 
+  // 숙박 선택에 따른 동적 링크 및 텍스트 설정
+  const getAgodaInfo = () => {
+    if (selections.stay === 550000) {
+      return {
+        link: "https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1963214&hl=es-es&hid=4409",
+        text: "Ver The Shilla Seoul (5성급)"
+      };
+    }
+    if (selections.stay === 160000) {
+      return {
+        link: "https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1963214&hl=es-es&hid=921919",
+        text: "Ver Shilla Stay Hongdae (3-4성급)"
+      };
+    }
+    if (selections.stay === 45000) {
+      return {
+        link: "https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1963214&hl=es-es&hid=646891",
+        text: "Ver Hostales Recomendados"
+      };
+    }
+    return {
+      link: "https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1963214&hl=es-es&city=14690",
+      text: "Ver Hoteles en Seúl"
+    };
+  };
+
+  const agoda = getAgodaInfo();
+
   return (
     <main className="min-h-screen bg-[#F8F9FA] py-10 px-4 font-sans text-[#1A1A1A]">
       <style jsx global>{`
@@ -128,11 +156,12 @@ export default function TravelPlanner() {
 
             <div className="space-y-4">
               <a 
-                href={`https://www.agoda.com/search?city=14690`} 
+                href={agoda.link} 
                 target="_blank"
-                className="block w-full bg-[#007AFF] text-white py-6 rounded-[2rem] font-black text-lg shadow-lg shadow-[#007AFF]/20 hover:scale-[1.02] active:scale-[0.98] transition-all"
+                rel="noopener noreferrer"
+                className="block w-full bg-[#007AFF] text-white py-6 rounded-[2rem] font-black text-lg shadow-lg shadow-[#007AFF]/20 hover:scale-[1.02] active:scale-[0.98] transition-all text-center"
               >
-                Ver Hoteles en Seúl
+                {agoda.text}
               </a>
               <button 
                 onClick={restart}
