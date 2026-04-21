@@ -39,7 +39,7 @@ export default function RootLayout({
       >
         {children}
 
-        {/* sw.js 등록 스크립트 추가 */}
+        {/* sw.js 등록 스크립트 */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -52,6 +52,24 @@ export default function RootLayout({
                   });
                 });
               }
+            `,
+          }}
+        />
+
+        {/* 비네트(Vignette) 광고 스크립트 */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function(s){s.dataset.zone='10905743',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))
+            `,
+          }}
+        />
+
+        {/* 인페이지 푸쉬(In-Page Push) 광고 스크립트 */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function(s){s.dataset.zone='10905748',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))
             `,
           }}
         />
