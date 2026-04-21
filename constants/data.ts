@@ -20,14 +20,14 @@ export const TRAVEL_QUESTIONS: Question[] = [
     options: [
       { text: "Hostal / Guesthouse", priceKRW: 45000, description: "Económico y social" },
       { text: "Hotel 3-4 estrellas", priceKRW: 160000, description: "Comodidad estándar" },
-      { text: "Hotel de Lujo (5성급)", priceKRW: 550000, description: "Experiencia premium" },
+      { text: "Hotel de Lujo", priceKRW: 550000, description: "Experiencia premium" },
     ]
   },
   {
     id: 'food',
     question: "¿Cómo planeas comer?",
     options: [
-      { text: "Comida callejera y 편의점", priceKRW: 35000, description: "Auténtico y barato" },
+      { text: "Comida callejera y Tiendas de conveniencia", priceKRW: 35000, description: "Auténtico y barato" },
       { text: "Restaurantes locales", priceKRW: 85000, description: "Tour gastronómico" },
       { text: "Fine Dining / Alta cocina", priceKRW: 220000, description: "Lo mejor de Seúl" },
     ]
@@ -45,9 +45,9 @@ export const TRAVEL_QUESTIONS: Question[] = [
     id: 'activity',
     question: "¿Qué es lo que más te emociona?",
     options: [
-      { text: "Cultura y Museos", priceKRW: 30000, description: "Palacios y templos (문화탐방)" },
-      { text: "K-Culture & Experiencias", priceKRW: 100000, description: "Clases y shows (체험)" },
-      { text: "Shopping", priceKRW: 350000, description: "¡A comprar todo! (쇼핑)" },
+      { text: "Cultura y Museos", priceKRW: 30000, description: "Palacios y templos antiguos" },
+      { text: "K-Culture & Experiencias", priceKRW: 100000, description: "Clases, K-pop y shows" },
+      { text: "Shopping", priceKRW: 350000, description: "¡A comprar de todo!" },
     ]
   }
 ];
