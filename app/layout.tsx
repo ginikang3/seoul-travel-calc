@@ -31,7 +31,8 @@ export const metadata: Metadata = {
 
   // 구글 서치 콘솔 및 아고다 인증
   verification: {
-    google: "google794289291312234d", // 제공해주신 인증 코드 반영
+    // 서치 콘솔에서 새로 확인된 코드로 정밀 수정
+    google: "n0h7YBDy8iiuMhb1xrE4NYG3wWCD66K11XfK0bNBRT4", 
     other: {
       "agd-partner-manual-verification": "true",
     },
