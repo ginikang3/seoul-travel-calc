@@ -14,12 +14,12 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  // 검색 최적화(SEO)를 위해 타이틀과 설명을 더 구체적인 스페인어 키워드로 수정
+  // SEO 최적화 타이틀 및 설명
   title: "¿Cuánto cuesta viajar a Seúl? | Calculadora de Presupuesto 2026",
   description: "Calcula tu presupuesto real para viajar a Seúl y Corea del Sur. Precios actualizados de hoteles, comida y transporte para 2026.",
   keywords: ["viaje a corea", "presupuesto seúl", "cuánto cuesta viajar a corea", "turismo corea 2026", "seoul travel guide"],
   
-  // SNS 공유 시 클릭률을 높이기 위한 OpenGraph 설정 추가
+  // OpenGraph 설정 (SNS 공유용)
   openGraph: {
     title: "Calculadora de Presupuesto para Viajar a Seúl 2026",
     description: "Obtén un presupuesto detallado de tu viaje a Corea en un minuto.",
@@ -29,8 +29,9 @@ export const metadata: Metadata = {
     type: "website",
   },
 
-  // 아고다 인증 메타 태그 (기존 유지)
+  // 구글 서치 콘솔 및 아고다 인증
   verification: {
+    google: "google794289291312234d", // 제공해주신 인증 코드 반영
     other: {
       "agd-partner-manual-verification": "true",
     },
@@ -45,14 +46,14 @@ export default function RootLayout({
   return (
     <html lang="es">
       <head>
-        {/* 필요한 경우 여기에 직접 태그를 넣을 수도 있지만, Next.js 표준인 위 metadata 방식을 추천합니다. */}
+        {/* head 영역 유지 */}
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
 
-        {/* sw.js 등록 스크립트 (기존 유지) */}
+        {/* sw.js 등록 스크립트 유지 */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -69,7 +70,7 @@ export default function RootLayout({
           }}
         />
 
-        {/* 비네트(Vignette) 광고 스크립트 (기존 유지) */}
+        {/* 비네트(Vignette) 광고 스크립트 유지 */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -78,7 +79,7 @@ export default function RootLayout({
           }}
         />
 
-        {/* 인페이지 푸쉬(In-Page Push) 광고 스크립트 (기존 유지) */}
+        {/* 인페이지 푸쉬(In-Page Push) 광고 스크립트 유지 */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
